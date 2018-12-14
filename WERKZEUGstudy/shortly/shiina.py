@@ -7,7 +7,7 @@ from werkzeug.exceptions import HTTPException, NotFound, MethodNotAllowed
 from werkzeug.wsgi import SharedDataMiddleware
 from werkzeug.utils import redirect
 from jinja2 import Environment, FileSystemLoader
-from functools import wraps
+from functools import wraps, update_wrapper
 
 class Shiina:
     config = {}
@@ -47,7 +47,7 @@ class Shiina:
             response = Response(response, mimetype='application/json')
         else:
 #            response = Response(list(str(response)))
-            raise response
+            response = response.get_response(environ)
         return response(environ, start_response)
 
     def run(self):

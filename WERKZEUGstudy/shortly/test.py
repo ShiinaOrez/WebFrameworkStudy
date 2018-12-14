@@ -5,7 +5,7 @@ app = create_app(with_static = False)
 
 @app.viewfunction('/')
 @app.method('GET')
-def origin(request):
+def origin(*args):
     print (app.url2endpoint.keys())
     return json.dumps({"msg": 'successful!'})
 
